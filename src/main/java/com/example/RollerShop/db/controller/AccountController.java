@@ -1,13 +1,9 @@
-package com.example.RollerShop.db.service;
+package com.example.RollerShop.db.controller;
 
-import com.example.RollerShop.db.dao.SkateDao;
-import com.example.RollerShop.db.entity.Skate;
-
+import com.example.RollerShop.db.service.SkateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(path = "/skates")

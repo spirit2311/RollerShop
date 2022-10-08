@@ -6,6 +6,4 @@ import java.util.List;
 
 public interface SkateService {
     Skate getSkateById(Integer id);
-
-    List<Skate> listSkates();
 }

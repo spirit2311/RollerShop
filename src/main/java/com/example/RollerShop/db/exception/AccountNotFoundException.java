@@ -1,4 +1,4 @@
-package com.example.RollerShop.db.service;
+package com.example.RollerShop.db.exception;
 
 public class AccountNotFoundException extends RuntimeException {
 
