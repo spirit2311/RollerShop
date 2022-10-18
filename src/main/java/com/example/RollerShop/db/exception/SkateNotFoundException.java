@@ -1,8 +1,8 @@
 package com.example.RollerShop.db.exception;
 
-public class AccountNotFoundException extends RuntimeException {
+public class SkateNotFoundException extends RuntimeException {
 
-    public AccountNotFoundException(Integer id) {
+    public SkateNotFoundException(Integer id) {
         super(String.format("Account id %s NOT FOUND", id));
     }
 }
