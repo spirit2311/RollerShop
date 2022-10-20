@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,54 +39,50 @@ public class SkateControllerTests {
     @Autowired
     private SkateRepository skateRepository;
 
-    @Autowired
-    private ObjectMapper objectMapper;
 
+    private ObjectMapper objectMapper = new ObjectMapper();
 
-    public SkateControllerTests(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-    }
 
     @BeforeEach
     void setup() {
         skateRepository.deleteAll();
     }
 
-//    @Test
-//    public void givenSkateObject_whenCreateSkate_thenReturnSavedSkate() throws Exception{
-//
-//        // given - precondition or setup
-//        Skate skate = Skate.builder()
-//                .id(1)
-//                .brand("Seba")
-//                .model("FrJun")
-//                .discipline("kids")
-//                .price(100)
-//                .description("kids skate")
-//                .build();
-//
-//        // when - action or behaviour that we are going test
-//        ResultActions response = mockMvc.perform((RequestBuilder) post("/api/rollerskate")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .contentLength(Long.parseLong(objectMapper.writeValueAsString(skate))));
-//
-//        // then - verify the result or output using assert statements
-//        response.andDo(print()).
-//                andExpect(status().isCreated())
-//                .andExpect((ResultMatcher) jsonPath("$.id",
-//                        is(skate.getId())))
-//                .andExpect((ResultMatcher) jsonPath("$.brand",
-//                        is(Integer.parseInt(skate.getBrand()))))
-//                .andExpect((ResultMatcher) jsonPath("$.model",
-//                        is(Integer.parseInt(skate.getModel()))))
-//                .andExpect((ResultMatcher) jsonPath("$.discipline",
-//                        is(Integer.parseInt(skate.getDiscipline()))))
-//                .andExpect((ResultMatcher) jsonPath("$.price",
-//                        is(skate.getPrice())))
-//                .andExpect((ResultMatcher) jsonPath("$.description",
-//                        is(Integer.parseInt(skate.getDescription()))));
-//
-//    }
+    @Test
+    public void givenSkateObject_whenCreateSkate_thenReturnSavedSkate() throws Exception {
+
+        // given - precondition or setup
+        Skate skate = Skate.builder()
+                .id(1)
+                .brand("Seba")
+                .model("FrJun")
+                .discipline("kids")
+                .price(100)
+                .description("kids skate")
+                .build();
+
+        // when - action or behaviour that we are going test
+        ResultActions response = mockMvc.perform(MockMvcRequestBuilders.post("/skates")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(skate)));
+
+        // then - verify the result or output using assert statements
+        response.andDo(print()).
+                andExpect(status().isCreated())
+                .andExpect((ResultMatcher) jsonPath("$.id",
+                        is(skate.getId())))
+                .andExpect((ResultMatcher) jsonPath("$.brand",
+                        is(Integer.parseInt(skate.getBrand()))))
+                .andExpect((ResultMatcher) jsonPath("$.model",
+                        is(Integer.parseInt(skate.getModel()))))
+                .andExpect((ResultMatcher) jsonPath("$.discipline",
+                        is(Integer.parseInt(skate.getDiscipline()))))
+                .andExpect((ResultMatcher) jsonPath("$.price",
+                        is(skate.getPrice())))
+                .andExpect((ResultMatcher) jsonPath("$.description",
+                        is(Integer.parseInt(skate.getDescription()))));
+
+    }
 //
 //    @Test
 //    public void givenListOfSkates_whenGetAllSkates_thenReturnSkatesList() throws Exception{

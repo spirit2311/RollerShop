@@ -7,11 +7,20 @@ import java.util.List;
 public interface SkateService {
     Skate getSkateById(Integer id);
 
+    List<Skate> getSkateByBrand(String brand);
+    List<Skate> getSkateByDiscipline(String discipline);
+
+    List<Skate> getSortSkateAsc();
+
+    List<Skate> getSortSkateDesc();
+
+    List<Skate> getSortRangePrice(Integer startPrice, Integer finishPrice);
+
     List<Skate> getAllSkate();
 
-    String saveSkate(Skate skateData);
+    Skate saveSkate(Skate skateData);
 
-    String updateSkate(Skate newSkateData);
+    Skate updateSkate(Skate newSkateData);
 
     void deleteSkate(Integer id);
 }

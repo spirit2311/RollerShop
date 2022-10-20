@@ -15,6 +15,8 @@ import javax.persistence.*;
 @Table(name = "rollerskate")
 public class Skate {
 
+//TODO Add TDO Skate and mapper
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")

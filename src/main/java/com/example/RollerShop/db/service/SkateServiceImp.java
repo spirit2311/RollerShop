@@ -26,27 +26,43 @@ public class SkateServiceImp implements SkateService {
     }
 
     @Override
+    public List<Skate> getSkateByBrand(String brand) {
+        return skateRepository.findByBrand(brand);
+    }
+
+    @Override
+    public List<Skate> getSkateByDiscipline(String discipline) {
+        return skateRepository.findByDiscipline(discipline);
+    }
+
+    @Override
+    public List<Skate> getSortSkateAsc() {
+        return skateRepository.sortByPriceAsc();
+    }
+
+    @Override
+    public List<Skate> getSortSkateDesc() {
+        return skateRepository.sortByPriceDesc();
+    }
+
+    @Override
+    public List<Skate> getSortRangePrice(Integer startPrice, Integer finishPrice) {
+        return skateRepository.sortByRangePrice(startPrice,finishPrice);
+    }
+
+    @Override
     public List<Skate> getAllSkate() {
         return skateRepository.findAll();
     }
 
     @Override
-    public String saveSkate(Skate skateData) {
-        skateRepository.save(skateData);
-        return "Skate Saved";
+    public Skate saveSkate(Skate skateData) {
+        return  skateRepository.save(skateData);
     }
 
     @Override
-    public String updateSkate(Skate newSkateData) {
-        String msg = null;
-        if (newSkateData.getId() != null) {
-            skateRepository.save(newSkateData);
-            msg = "Data updated";
-        } else {
-            msg = "Error";
-        }
-
-        return msg;
+    public Skate updateSkate(Skate newSkateData) {
+        return skateRepository.save(newSkateData);
     }
 
     @Override

@@ -16,6 +16,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SkateController {
 
+    //TODO change getmapping all to one and use @RequestParam
+
 private final SkateRepository skateRepository;
     public final SkateService skateService;
 
@@ -28,17 +30,44 @@ private final SkateRepository skateRepository;
         return  skateService.getAllSkate();
     }
 
+    @GetMapping(path = "/brands/{brand}")
+    public List<Skate> getSkateByBrand(@PathVariable("brand") String brand){
+        return skateService.getSkateByBrand(brand);
+    }
+
+    @GetMapping(path = "/disciplines/{discipline}")
+    public List<Skate> getSkateByDiscipline(@PathVariable("discipline") String discipline){
+        return skateService.getSkateByDiscipline(discipline);
+    }
+
+    @GetMapping(path="/sort/asc")
+    public @ResponseBody List<Skate> getSortSkatesAsc() {
+        return skateService.getSortSkateAsc();
+    }
+
+    @GetMapping(path="/sort/desc")
+    public @ResponseBody List<Skate> getSortSkatesDesc() {
+        return skateService.getSortSkateDesc();
+    }
+//    @GetMapping(path="/sort/{price}")
+//    public @ResponseBody List<Skate> getSortRangePrice(
+//            @PathVariable("price") Integer startPrice, Integer finishPrice) {
+//        return skateService.getSortRangePrice(startPrice, finishPrice);
+//    }
+
     //POST
-    @PostMapping(path = "/add")
-    public String addSkate(@RequestBody Skate skateData) {
+    @PostMapping()
+    public Skate addSkate(@RequestBody Skate skateData) {
         return skateService.saveSkate(skateData);
     }
+
     //PUT
-    @PutMapping("/update")
-    public String updateUser(@RequestBody Skate newSkaterData) {
+    @PutMapping()
+    public Skate updateUser(@RequestBody Skate newSkaterData) {
         return skateService.updateSkate(newSkaterData);
     }
-    @DeleteMapping("{id}")
+
+    @DeleteMapping("/{id}")
         public ResponseEntity<String> deleteSkate(@PathVariable("id") Integer skateId){
 
             skateService.deleteSkate(skateId);
