@@ -37,5 +37,4 @@ public class Skate {
     @Column(name = "description")
     private String description;
 
-//    private ENUM type;
 }

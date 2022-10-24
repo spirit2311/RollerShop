@@ -27,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static sun.nio.cs.Surrogate.is;
 
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class SkateControllerTests {
@@ -45,7 +46,7 @@ public class SkateControllerTests {
 
     @BeforeEach
     void setup() {
-        skateRepository.deleteAll();
+        skateRepository.findAll();
     }
 
     @Test

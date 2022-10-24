@@ -25,34 +25,76 @@ public class SkateServiceImp implements SkateService {
         return skateRepository.findById(id).orElseThrow(() -> new SkateNotFoundException(id));
     }
 
-    @Override
-    public List<Skate> getSkateByBrand(String brand) {
-        return skateRepository.findByBrand(brand);
-    }
+//    @Override
+//    public List<Skate> getSkateByBrand(String brand) {
+//        return skateRepository.findByBrand(brand);
+//    }
+//
+//    @Override
+//    public List<Skate> getSkateByDiscipline(String discipline) {
+//        return skateRepository.findByDiscipline(discipline);
+//    }
+//
+//    @Override
+//    public List<SkateDto> getSortSkateAsc() {
+//        return skateRepository.sortByPriceAsc()
+//                .stream()
+//                .map(skateMapper::toSkateDto)
+//                .collect(Collectors.toList());
+//    }
+//
+//    @Override
+//    public List<Skate> getSortSkateDesc() {
+//        return skateRepository.sortByPriceDesc()
+//                .stream()
+//                .map(skateMapper::toSkateDto)
+//                .collect(Collectors.toList())
+//        ;
+//    }
+//
+//    @Override
+//    public List<Skate> getSortRangePrice(Integer startPrice, Integer finishPrice) {
+//        return skateRepository.sortByRangePrice(startPrice, finishPrice);
+//    }
+//    @Override
+//    public List<Skate> getAllSkates(){
+//        return skateRepository.findAll();
+//    }
 
     @Override
-    public List<Skate> getSkateByDiscipline(String discipline) {
-        return skateRepository.findByDiscipline(discipline);
-    }
+    public List<Skate> getAllSkates(String brand, String discipline, Optional<String> sortDirection, Integer priceFrom, Integer priceTo){
+        Specification<Skate> specification = (skateRoot, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
 
-    @Override
-    public List<Skate> getSortSkateAsc() {
-        return skateRepository.sortByPriceAsc();
-    }
+            if (StringUtils.hasText(brand)) {
+                predicates.add(criteriaBuilder.like(skateRoot.get("brand"), "%" + brand + "%"));
+            }
 
-    @Override
-    public List<Skate> getSortSkateDesc() {
-        return skateRepository.sortByPriceDesc();
-    }
+            if (StringUtils.hasText(discipline)) {
+                predicates.add(criteriaBuilder.like(skateRoot.get("discipline"), "%" + discipline + "%"));
+            }
 
-    @Override
-    public List<Skate> getSortRangePrice(Integer startPrice, Integer finishPrice) {
-        return skateRepository.sortByRangePrice(startPrice,finishPrice);
-    }
+            if (sortDirection.equals("desc")) {
+                query.orderBy(criteriaBuilder.desc(skateRoot.get("price")));
 
-    @Override
-    public List<Skate> getAllSkate() {
-        return skateRepository.findAll();
+            }
+            if (sortDirection.equals("asc")) {
+                query.orderBy(criteriaBuilder.asc(skateRoot.get("price")));
+
+            }
+
+            predicates.add(
+                    criteriaBuilder.and(
+                            criteriaBuilder.greaterThan(skateRoot.get("price"), priceFrom),
+                            criteriaBuilder.lessThan(skateRoot.get("price"), priceTo))
+            );
+
+            return criteriaBuilder.and(
+                    predicates.toArray(new Predicate[0])
+            );
+        };
+
+        return skateRepository.findAll(specification);
     }
 
     @Override

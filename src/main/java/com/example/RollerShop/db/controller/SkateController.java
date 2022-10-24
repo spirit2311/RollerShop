@@ -5,11 +5,11 @@ import com.example.RollerShop.db.repository.SkateRepository;
 import com.example.RollerShop.db.service.SkateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/skates")
@@ -30,30 +30,6 @@ private final SkateRepository skateRepository;
         return  skateService.getAllSkate();
     }
 
-    @GetMapping(path = "/brands/{brand}")
-    public List<Skate> getSkateByBrand(@PathVariable("brand") String brand){
-        return skateService.getSkateByBrand(brand);
-    }
-
-    @GetMapping(path = "/disciplines/{discipline}")
-    public List<Skate> getSkateByDiscipline(@PathVariable("discipline") String discipline){
-        return skateService.getSkateByDiscipline(discipline);
-    }
-
-    @GetMapping(path="/sort/asc")
-    public @ResponseBody List<Skate> getSortSkatesAsc() {
-        return skateService.getSortSkateAsc();
-    }
-
-    @GetMapping(path="/sort/desc")
-    public @ResponseBody List<Skate> getSortSkatesDesc() {
-        return skateService.getSortSkateDesc();
-    }
-//    @GetMapping(path="/sort/{price}")
-//    public @ResponseBody List<Skate> getSortRangePrice(
-//            @PathVariable("price") Integer startPrice, Integer finishPrice) {
-//        return skateService.getSortRangePrice(startPrice, finishPrice);
-//    }
 
     //POST
     @PostMapping()
