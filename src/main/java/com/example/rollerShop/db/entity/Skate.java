@@ -1,4 +1,4 @@
-package com.example.RollerShop.db.entity;
+package com.example.rollerShop.db.entity;
 
 
 import lombok.*;
@@ -14,8 +14,6 @@ import javax.persistence.*;
 @Builder
 @Table(name = "rollerskate")
 public class Skate {
-
-//TODO Add TDO Skate and mapper
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

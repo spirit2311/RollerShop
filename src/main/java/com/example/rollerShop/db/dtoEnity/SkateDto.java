@@ -1,4 +1,4 @@
-package com.example.RollerShop.db.dtoEnity;
+package com.example.rollerShop.db.dtoEnity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,9 +24,9 @@ import javax.validation.constraints.Size;
 @Data
 public class SkateDto {
 
-//    @Positive
-//    @Column(name = "Id")
-//    private Integer id;
+    @Positive
+    @Column(name = "Id")
+    private Integer id;
 
     @NonNull
     @Size(min = 1, max = 30, message

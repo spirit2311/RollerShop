@@ -1,4 +1,4 @@
-package com.example.RollerShop.db.service;
+package com.example.rollerShop.db.service;
 
 import com.example.RollerShop.db.repository.SkateRepository;
 import com.example.RollerShop.db.entity.Skate;
@@ -21,48 +21,16 @@ public class SkateServiceImp implements SkateService {
     }
 
     @Override
-    public Skate getSkateById(Integer id) {
-        return skateRepository.findById(id).orElseThrow(() -> new SkateNotFoundException(id));
+    public List<SkateDto> getSkateById(Integer id) {
+        return skateRepository.findById(id)
+                .stream()
+                .map(skateMapper::toSkateDto)
+                .collect(Collectors.toList());
+//                .orElseThrow(() -> new SkateNotFoundException(id));
     }
 
-//    @Override
-//    public List<Skate> getSkateByBrand(String brand) {
-//        return skateRepository.findByBrand(brand);
-//    }
-//
-//    @Override
-//    public List<Skate> getSkateByDiscipline(String discipline) {
-//        return skateRepository.findByDiscipline(discipline);
-//    }
-//
-//    @Override
-//    public List<SkateDto> getSortSkateAsc() {
-//        return skateRepository.sortByPriceAsc()
-//                .stream()
-//                .map(skateMapper::toSkateDto)
-//                .collect(Collectors.toList());
-//    }
-//
-//    @Override
-//    public List<Skate> getSortSkateDesc() {
-//        return skateRepository.sortByPriceDesc()
-//                .stream()
-//                .map(skateMapper::toSkateDto)
-//                .collect(Collectors.toList())
-//        ;
-//    }
-//
-//    @Override
-//    public List<Skate> getSortRangePrice(Integer startPrice, Integer finishPrice) {
-//        return skateRepository.sortByRangePrice(startPrice, finishPrice);
-//    }
-//    @Override
-//    public List<Skate> getAllSkates(){
-//        return skateRepository.findAll();
-//    }
-
     @Override
-    public List<Skate> getAllSkates(String brand, String discipline, Optional<String> sortDirection, Integer priceFrom, Integer priceTo){
+    public List<SkateDto> getAllSkates(String brand, String discipline, String sortDirection, Integer priceFrom, Integer priceTo) {
         Specification<Skate> specification = (skateRoot, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -80,7 +48,6 @@ public class SkateServiceImp implements SkateService {
             }
             if (sortDirection.equals("asc")) {
                 query.orderBy(criteriaBuilder.asc(skateRoot.get("price")));
-
             }
 
             predicates.add(
@@ -94,7 +61,10 @@ public class SkateServiceImp implements SkateService {
             );
         };
 
-        return skateRepository.findAll(specification);
+        return skateRepository.findAll(specification)
+                .stream()
+                .map(skateMapper::toSkateDto)
+                .collect(Collectors.toList());
     }
 
     @Override
