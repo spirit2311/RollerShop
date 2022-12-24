@@ -7,10 +7,12 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface SkateRepository extends JpaRepository<Skate,Integer> {
+public interface SkateRepository extends JpaRepository<Skate, Integer>, JpaSpecificationExecutor<Skate> {
+    @NonNull
     Optional<Skate> findById(Integer id);
 
 }

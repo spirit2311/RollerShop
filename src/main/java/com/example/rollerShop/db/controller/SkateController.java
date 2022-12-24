@@ -22,12 +22,18 @@ public class SkateController {
     private final SkateMapper skateMapper;
 
     @GetMapping(value = "/{id}")
-    public List<SkateDto> getAccountById(@PathVariable("id") Integer id) {
+    public List<SkateDto> getSkateById(@PathVariable("id") Integer id) {
         return skateService.getSkateById(id);
     }
-    @GetMapping(path="/all")
-    public @ResponseBody List<Skate> getAllUsers() {
-        return  skateService.getAllSkate();
+
+    @GetMapping(path = "/all")
+    public ResponseEntity<?> getAllSkates(
+            @RequestParam(value = "brand", defaultValue = "") String brand,
+            @RequestParam(value = "discipline", defaultValue = "") String discipline,
+            @RequestParam(value = "sort", defaultValue = "asc") String sortDirection,
+            @RequestParam(value = "priceFrom", defaultValue = "0") Integer startPrice,
+            @RequestParam(value = "priceTo", defaultValue = "10000") Integer finishPrice) {
+        return ResponseEntity.ok(skateService.getAllSkates(brand, discipline, sortDirection, startPrice, finishPrice));
     }
 
 
@@ -41,18 +47,16 @@ public class SkateController {
 
     //PUT
     @PutMapping()
-    public ResponseEntity<?> updateUser(@RequestBody SkateDto newSkateDtoData) {
+    public ResponseEntity<?> updateSkate(@RequestBody SkateDto newSkateDtoData) {
         Skate skate  = skateMapper.toSkate(newSkateDtoData);
         Skate postCreated = skateService.saveSkate(skate);
         return ResponseEntity.ok(postCreated);
     }
 
     @DeleteMapping("/{id}")
-        public ResponseEntity<String> deleteSkate(@PathVariable("id") Integer skateId){
+    public ResponseEntity<String> deleteSkate(@PathVariable("id") Integer skateId) {
+        skateService.deleteSkate(skateId);
+        return new ResponseEntity<String>("Skate deleted successfully!.", HttpStatus.OK);
 
-            skateService.deleteSkate(skateId);
-
-            return new ResponseEntity<String>("Skate deleted successfully!.", HttpStatus.OK);
-
-        }
+    }
 }

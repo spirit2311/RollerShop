@@ -13,12 +13,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SkateServiceImp implements SkateService {
 
-    private SkateRepository skateRepository;
+    private final SkateRepository skateRepository;
 
-    @Autowired
-    public SkateServiceImp(SkateRepository skateDao) {
-        this.skateRepository = skateDao;
-    }
+    private final SkateMapper skateMapper;
 
     @Override
     public List<SkateDto> getSkateById(Integer id) {
