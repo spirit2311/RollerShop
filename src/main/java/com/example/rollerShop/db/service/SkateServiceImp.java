@@ -1,13 +1,18 @@
 package com.example.rollerShop.db.service;
 
-import com.example.RollerShop.db.repository.SkateRepository;
-import com.example.RollerShop.db.entity.Skate;
-import com.example.RollerShop.db.exception.SkateNotFoundException;
+import com.example.rollerShop.db.dtoEnity.SkateDto;
+import com.example.rollerShop.db.dtoEnity.SkateMapper;
+import com.example.rollerShop.db.repository.SkateRepository;
+import com.example.rollerShop.db.entity.Skate;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -66,7 +71,7 @@ public class SkateServiceImp implements SkateService {
 
     @Override
     public Skate saveSkate(Skate skateData) {
-        return  skateRepository.save(skateData);
+        return skateRepository.save(skateData);
     }
 
     @Override
