@@ -1,60 +1,51 @@
 package com.example.rollerShop.db.dtoEnity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import java.util.UUID;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
-@Data
 public class SkateDto {
 
-    @Positive
-    @Column(name = "Id")
-    private Integer id;
+//    @Positive
+//    private Integer id;
+
+    private UUID uuid = UUID.randomUUID();
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer disciplineId;
+
+    private DisciplineDto discipline;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer brandId;
+
+    private BrandDto brand;
 
     @NonNull
-    @Size(min = 1, max = 30, message
-            = "About Me must be between 1 and 30 characters")
-    @Column(name = "brand")
-    private String brand;
-
-    @NonNull
-    @Size(min = 1, max = 30, message
-            = "About Me must be between 1 and 30 characters")
-    @Column(name = "model")
+    @Size(min = 1, max = 30, message = "About Me must be between 1 and 30 characters")
     private String model;
 
     @NonNull
-    @Size(min = 1, max = 15, message
-            = "About Me must be between 1 and 15 characters")
-    @Column(name = "discipline")
-    private String discipline;
+    @Min(value = 2000, message = "Year Should not be less than 2000")
+    @Max(value = 2023, message = "Year should not be greater than 2023")
+    private Integer year;
 
     @NonNull
     @Min(value = 50, message = "Price Should not be less than 50")
     @Max(value = 2500, message = "Price should not be greater than 2500")
-    @Column(name = "price")
     private Integer price;
 
     @NonNull
     @Size(min = 15, max = 500, message
             = "About Me must be between 15 and 500 characters")
-    @Column(name = "description")
     private String description;
 }

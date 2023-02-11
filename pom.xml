@@ -96,10 +96,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-			<version>9.8.3</version>
+			<artifactId>flyway-mysql</artifactId>
 		</dependency>
-
 
 		<!--		&lt;!&ndash; https://mvnrepository.com/artifact/org.mockito/mockito-core &ndash;&gt;-->
 <!--		<dependency>-->
@@ -124,18 +122,6 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.flywaydb</groupId>
-				<artifactId>flyway-maven-plugin</artifactId>
-				<version>8.5.13</version>
-				<configuration>
-					<user>databaseUser</user>
-					<password>databasePassword</password>
-					<schemas>
-						<schema>schemaName</schema>
-					</schemas>
 				</configuration>
 			</plugin>
 		</plugins>

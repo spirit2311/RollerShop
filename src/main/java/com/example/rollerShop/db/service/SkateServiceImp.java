@@ -2,16 +2,22 @@ package com.example.rollerShop.db.service;
 
 import com.example.rollerShop.db.dtoEnity.SkateDto;
 import com.example.rollerShop.db.dtoEnity.SkateMapper;
-import com.example.rollerShop.db.repository.SkateRepository;
+import com.example.rollerShop.db.entity.Brand;
+import com.example.rollerShop.db.entity.Discipline;
 import com.example.rollerShop.db.entity.Skate;
+import com.example.rollerShop.db.repository.BrandRepository;
+import com.example.rollerShop.db.repository.DisciplineRepository;
+import com.example.rollerShop.db.repository.SkateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,9 +28,13 @@ public class SkateServiceImp implements SkateService {
 
     private final SkateMapper skateMapper;
 
+    private final BrandRepository brandRepository;
+
+    private final DisciplineRepository disciplineRepository;
+
     @Override
-    public List<SkateDto> getSkateById(Integer id) {
-        return skateRepository.findById(id)
+    public List<SkateDto> getSkateByUuid(UUID uuid) {
+        return skateRepository.findByUuid(uuid)
                 .stream()
                 .map(skateMapper::toSkateDto)
                 .collect(Collectors.toList());
@@ -32,7 +42,7 @@ public class SkateServiceImp implements SkateService {
     }
 
     @Override
-    public List<SkateDto> getAllSkates(String brand, String discipline, String sortDirection, Integer priceFrom, Integer priceTo) {
+    public List<SkateDto> getAllSkates(String brand, String discipline, Integer year, String sortDirection, Integer priceFrom, Integer priceTo) {
         Specification<Skate> specification = (skateRoot, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -70,13 +80,32 @@ public class SkateServiceImp implements SkateService {
     }
 
     @Override
-    public Skate saveSkate(Skate skateData) {
-        return skateRepository.save(skateData);
+    public SkateDto saveSkate(SkateDto skateData) {
+        Discipline discipline = disciplineRepository.findById(skateData.getDisciplineId())
+                .orElseThrow(() -> new RuntimeException("discipline not found"));
+        Brand brand = brandRepository.findById(skateData.getBrandId())
+                .orElseThrow(() -> new RuntimeException("brand not found"));
+        Skate skate = skateMapper.toSkate(skateData);
+        skate.setDiscipline(discipline);
+        skate.setBrand(brand);
+        skateRepository.save(skate);
+        return skateData;
     }
 
+    @Transactional
     @Override
-    public Skate updateSkate(Skate newSkateData) {
-        return skateRepository.save(newSkateData);
+    public void updateSkate(UUID uuid, SkateDto updateSkateData) {
+        Skate skate = skateRepository.findByUuid(uuid)
+                .orElseThrow(() -> new RuntimeException(
+                        String.format("Skate with UUID %s no found", uuid)
+                ));
+        Skate newSkateData = skateMapper.toSkate(updateSkateData);
+        skate.setBrand(newSkateData.getBrand());
+        skate.setDiscipline(newSkateData.getDiscipline());
+        skate.setModel(newSkateData.getModel());
+        skate.setYear(newSkateData.getYear());
+        skate.setPrice(newSkateData.getPrice());
+        skate.setDescription(newSkateData.getDescription());
     }
 
     @Override

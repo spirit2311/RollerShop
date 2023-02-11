@@ -1,6 +1,7 @@
 package com.example.rollerShop.db.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -12,25 +13,18 @@ import java.util.UUID;
 @AllArgsConstructor
 @ToString
 @Builder
-@Table(name = "orders")
-public class Order extends BaseEntity {
+@Table(name = "brand")
+public class Brand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @org.hibernate.annotations.Type(type = "uuid-char")
+    @Type(type = "uuid-char")
     @Column(name = "UUID")
     private UUID uuid = UUID.randomUUID();
 
-    @Column(name = "time")
-    private String createdDate;
-
-    @Column(name = "items")
-    private String items;
-
-    @Column(name = "users")
-    private String users;
-
+    @Column(name = "brand")
+    private String brand;
 }

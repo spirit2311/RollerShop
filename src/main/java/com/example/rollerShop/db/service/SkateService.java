@@ -1,18 +1,18 @@
 package com.example.rollerShop.db.service;
 
 import com.example.rollerShop.db.dtoEnity.SkateDto;
-import com.example.rollerShop.db.entity.Skate;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface SkateService {
-    List<SkateDto> getSkateById(Integer id);
+    List<SkateDto> getSkateByUuid(UUID uuid);
 
-    List<SkateDto> getAllSkates(String brand, String discipline, String sortDirection, Integer priceFrom, Integer priceTo);
+    List<SkateDto> getAllSkates(String brand, String discipline, Integer year, String sortDirection, Integer priceFrom, Integer priceTo);
 
-    Skate saveSkate(Skate skateData);
+    SkateDto saveSkate(SkateDto skateData);
 
-    Skate updateSkate(Skate newSkateData);
+    void updateSkate(UUID uuid, SkateDto newSkateData);
 
     void deleteSkate(Integer id);
 }

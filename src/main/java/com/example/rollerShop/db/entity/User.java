@@ -1,13 +1,46 @@
 package com.example.rollerShop.db.entity;
 
-import java.util.Set;
+import lombok.*;
 
-public class User extends BaseEntity{
+import javax.persistence.*;
+import java.util.UUID;
 
-    private String email;
-    private String phoneNumber;
+@Setter
+@Getter
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Builder
+@Table(name = "users")
+public class User extends BaseEntity {
 
-    private Set<Order> orders;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @org.hibernate.annotations.Type(type = "uuid-char")
+    @Column(name = "UUID")
+    private UUID uuid = UUID.randomUUID();
+
+    @Column(name = "mail")
+    private String mail;
+
+    @Column(name = "login")
+    private String login;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "google_key")
+    private String googleKey;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "adress")
+    private String adress;
 
 
 }

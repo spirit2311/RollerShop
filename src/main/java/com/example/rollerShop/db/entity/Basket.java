@@ -12,8 +12,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @ToString
 @Builder
-@Table(name = "orders")
-public class Order extends BaseEntity {
+@Table(name = "basket")
+public class Basket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,13 +24,6 @@ public class Order extends BaseEntity {
     @Column(name = "UUID")
     private UUID uuid = UUID.randomUUID();
 
-    @Column(name = "time")
-    private String createdDate;
-
     @Column(name = "items")
     private String items;
-
-    @Column(name = "users")
-    private String users;
-
 }

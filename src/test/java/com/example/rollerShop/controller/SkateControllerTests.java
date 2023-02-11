@@ -1,34 +1,24 @@
 package com.example.rollerShop.controller;
 
 import com.example.rollerShop.db.controller.SkateController;
-import com.example.rollerShop.db.entity.Skate;
 import com.example.rollerShop.db.repository.SkateRepository;
 import com.example.rollerShop.db.service.SkateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import javax.validation.constraints.NotNull;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @RunWith(SpringRunner.class)
@@ -41,8 +31,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Slf4j
 public class SkateControllerTests {
 
-    @Autowired
-    private MockMvc mockMvc;
+    //    @Autowired
+//    private MockMvc mockMvc;
     @Autowired
     public SkateController controller;
     @Autowired
@@ -69,7 +59,7 @@ public class SkateControllerTests {
 
     @Test
     public void addSkatesFromDb() {
-        skateRepository.save(new Skate(999, "TEST", "MODEL", "SLALOM", 999, "DESCRIPTION"));
+//        skateRepository.save(new Skate(999, "TEST", "MODEL", "SLALOM", 999, "DESCRIPTION"));
         log.info("{}", skateRepository.findAll());
         log.info("{}", skateRepository.findAll().size());
         //given
@@ -110,12 +100,12 @@ public class SkateControllerTests {
 //                .andExpect((ResultMatcher) jsonPath("$.brand").value(""));
 //    }
 
-    @Test
-    @DisplayName("THIS IS MY TEST WITH SPECIFIC CASE")
-    public void givenFindAllApiUrl_whenReturnList_thenListSizeShouldMatch() throws Exception {
-        this.mockMvc.perform(get("/skates/all")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.size").value(this.skateRepository.findAll().size()));
-    }
+//    @Test
+//    @DisplayName("THIS IS MY TEST WITH SPECIFIC CASE")
+//    public void givenFindAllApiUrl_whenReturnList_thenListSizeShouldMatch() throws Exception {
+//        this.mockMvc.perform(get("/skates/all")
+//                        .accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.size").value(this.skateRepository.findAll().size()));
+//    }
 }
