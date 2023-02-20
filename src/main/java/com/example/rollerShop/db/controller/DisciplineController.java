@@ -43,8 +43,8 @@ public class DisciplineController {
     }
 
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteDiscipline(@PathVariable("id") UUID disciplineUuid) {
+    @DeleteMapping("{uuid}")
+    public ResponseEntity<String> deleteDiscipline(@PathVariable("uuid") UUID disciplineUuid) {
 
         disciplineService.deleteDiscipline(disciplineUuid);
 
