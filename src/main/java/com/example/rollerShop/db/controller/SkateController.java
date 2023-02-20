@@ -29,10 +29,11 @@ public class SkateController {
             @RequestParam(value = "brand", defaultValue = "") String brand,
             @RequestParam(value = "discipline", defaultValue = "") String discipline,
             @RequestParam(value = "year", defaultValue = "") Integer year,
+            @RequestParam(value = "sortYear", defaultValue = "asc") String sortYear,
             @RequestParam(value = "sort", defaultValue = "asc") String sortDirection,
             @RequestParam(value = "priceFrom", defaultValue = "0") Integer startPrice,
             @RequestParam(value = "priceTo", defaultValue = "10000") Integer finishPrice) {
-        return ResponseEntity.ok(skateService.getAllSkates(brand, discipline, year, sortDirection, startPrice, finishPrice));
+        return ResponseEntity.ok(skateService.getAllSkates(brand, discipline, year, sortYear, sortDirection, startPrice, finishPrice));
     }
 
 
@@ -51,9 +52,9 @@ public class SkateController {
         return ResponseEntity.accepted().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteSkate(@PathVariable("id") Integer skateId) {
-        skateService.deleteSkate(skateId);
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<String> deleteSkate(@PathVariable("uuid") UUID skateUuid) {
+        skateService.deleteSkate(skateUuid);
         return new ResponseEntity<String>("Skate deleted successfully!.", HttpStatus.OK);
 
     }

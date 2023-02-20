@@ -8,11 +8,11 @@ import java.util.UUID;
 public interface SkateService {
     List<SkateDto> getSkateByUuid(UUID uuid);
 
-    List<SkateDto> getAllSkates(String brand, String discipline, Integer year, String sortDirection, Integer priceFrom, Integer priceTo);
+    List<SkateDto> getAllSkates(String brand, String discipline, Integer year, String sortYear, String sortDirection, Integer priceFrom, Integer priceTo);
 
     SkateDto saveSkate(SkateDto skateData);
 
     void updateSkate(UUID uuid, SkateDto newSkateData);
 
-    void deleteSkate(Integer id);
+    void deleteSkate(UUID uuid);
 }

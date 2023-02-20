@@ -1,4 +1,4 @@
-package com.example.rollerShop.db.service;
+package com.example.rollerShop.db.service.impl;
 
 import com.example.rollerShop.db.dtoEnity.SkateDto;
 import com.example.rollerShop.db.dtoEnity.SkateMapper;
@@ -8,12 +8,14 @@ import com.example.rollerShop.db.entity.Skate;
 import com.example.rollerShop.db.repository.BrandRepository;
 import com.example.rollerShop.db.repository.DisciplineRepository;
 import com.example.rollerShop.db.repository.SkateRepository;
+import com.example.rollerShop.db.service.SkateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +44,7 @@ public class SkateServiceImp implements SkateService {
     }
 
     @Override
-    public List<SkateDto> getAllSkates(String brand, String discipline, Integer year, String sortDirection, Integer priceFrom, Integer priceTo) {
+    public List<SkateDto> getAllSkates(String brand, String discipline, Integer year, String sortYear, String sortDirection, Integer priceFrom, Integer priceTo) {
         Specification<Skate> specification = (skateRoot, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -53,6 +55,20 @@ public class SkateServiceImp implements SkateService {
             if (StringUtils.hasText(discipline)) {
                 predicates.add(criteriaBuilder.like(skateRoot.get("discipline"), "%" + discipline + "%"));
             }
+
+//            if (StringUtils.hasText(String.valueOf(year))){
+//                predicates.add(criteriaBuilder.like(skateRoot.get("year"), "%" + year + "%"));
+//            }
+//
+
+            if (sortYear.equals("desc")){
+                query.orderBy(criteriaBuilder.desc(skateRoot.get("year")));
+            }
+
+            if(sortYear.equals("asc")){
+                query.orderBy(criteriaBuilder.asc(skateRoot.get("year")));
+            }
+
 
             if (sortDirection.equals("desc")) {
                 query.orderBy(criteriaBuilder.desc(skateRoot.get("price")));
@@ -109,7 +125,8 @@ public class SkateServiceImp implements SkateService {
     }
 
     @Override
-    public void deleteSkate(Integer id) {
-        skateRepository.deleteById(id);
+    @Transactional
+    public void deleteSkate(UUID uuid) {
+        skateRepository.deleteByUuid(uuid);
     }
 }
