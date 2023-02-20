@@ -1,8 +1,9 @@
-package com.example.rollerShop.db.service;
+package com.example.rollerShop.db.service.impl;
 
 import com.example.rollerShop.db.dtoEnity.BrandDto;
 import com.example.rollerShop.db.entity.Brand;
 import com.example.rollerShop.db.repository.BrandRepository;
+import com.example.rollerShop.db.service.BrandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,12 @@ public class BrandServiceImp implements BrandService {
         return brandRepository.findByUuid(uuid)
                 .stream()
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Brand> getAllBrand() {
+
+        return brandRepository.findAll();
     }
 
     @Override

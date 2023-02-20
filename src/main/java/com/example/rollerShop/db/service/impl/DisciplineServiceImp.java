@@ -1,8 +1,10 @@
-package com.example.rollerShop.db.service;
+package com.example.rollerShop.db.service.impl;
 
 import com.example.rollerShop.db.dtoEnity.DisciplineDto;
 import com.example.rollerShop.db.entity.Discipline;
+import com.example.rollerShop.db.entity.User;
 import com.example.rollerShop.db.repository.DisciplineRepository;
+import com.example.rollerShop.db.service.DisciplineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,12 @@ public class DisciplineServiceImp implements DisciplineService {
         return disciplineRepository.findByUuid(uuid)
                 .stream()
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Discipline> getAllDiscipline() {
+
+        return disciplineRepository.findAll();
     }
 
     @Override

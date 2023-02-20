@@ -24,6 +24,11 @@ public class BrandController {
         return brandService.getBrandByUuid(uuid);
     }
 
+    @GetMapping(value = "/all")
+    public List<Brand> getAllBrands(){
+        return brandService.getAllBrand();
+    }
+
     @PostMapping()
     public ResponseEntity<?> addBrand(@RequestBody BrandDto brandData) {
         brandService.saveBrand(brandData);

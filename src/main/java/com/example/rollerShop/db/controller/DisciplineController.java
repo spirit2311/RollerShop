@@ -2,6 +2,7 @@ package com.example.rollerShop.db.controller;
 
 
 import com.example.rollerShop.db.dtoEnity.DisciplineDto;
+import com.example.rollerShop.db.entity.Brand;
 import com.example.rollerShop.db.entity.Discipline;
 import com.example.rollerShop.db.service.DisciplineService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,11 @@ public class DisciplineController {
     @GetMapping(value = "/{id}")
     public List<Discipline> getSkateById(@PathVariable("id") UUID uuid) {
         return disciplineService.getDisciplineByUuid(uuid);
+    }
+
+    @GetMapping(value = "/all")
+    public List<Discipline> getAllBrands(){
+        return disciplineService.getAllDiscipline();
     }
 
     @PostMapping()
