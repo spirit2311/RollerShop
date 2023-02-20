@@ -26,8 +26,8 @@ public class DisciplineController {
     }
 
     @GetMapping(value = "/all")
-    public List<Discipline> getAllBrands(){
-        return disciplineService.getAllDiscipline();
+    public List<Discipline> getAllDisciplines(){
+        return disciplineService.getAllDisciplines();
     }
 
     @PostMapping()
@@ -48,7 +48,7 @@ public class DisciplineController {
 
         disciplineService.deleteDiscipline(disciplineUuid);
 
-        return new ResponseEntity<String>("Discipline deleted successfully!.", HttpStatus.OK);
+        return new ResponseEntity<>("Discipline deleted successfully!.", HttpStatus.OK);
 
     }
 

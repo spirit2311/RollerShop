@@ -11,7 +11,7 @@ public interface DisciplineService {
 
     List<Discipline> getDisciplineByUuid(UUID uuid);
 
-    List<Discipline> getAllDiscipline();
+    List<Discipline> getAllDisciplines();
 
     Discipline saveDiscipline(DisciplineDto disciplineData);
 

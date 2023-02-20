@@ -26,7 +26,7 @@ public class BrandController {
 
     @GetMapping(value = "/all")
     public List<Brand> getAllBrands(){
-        return brandService.getAllBrand();
+        return brandService.getAllBrands();
     }
 
     @PostMapping()

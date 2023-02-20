@@ -11,7 +11,7 @@ public interface BrandService {
 
     List<Brand> getBrandByUuid(UUID uuid);
 
-    List<Brand> getAllBrand();
+    List<Brand> getAllBrands();
 
 
     Brand saveBrand(BrandDto brandData);

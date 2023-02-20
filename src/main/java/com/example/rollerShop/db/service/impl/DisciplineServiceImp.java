@@ -8,6 +8,7 @@ import com.example.rollerShop.db.service.DisciplineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -28,7 +29,7 @@ public class DisciplineServiceImp implements DisciplineService {
     }
 
     @Override
-    public List<Discipline> getAllDiscipline() {
+    public List<Discipline> getAllDisciplines() {
 
         return disciplineRepository.findAll();
     }
@@ -48,6 +49,7 @@ public class DisciplineServiceImp implements DisciplineService {
     }
 
     @Override
+    @Transactional
     public void deleteDiscipline(UUID uuid) {
         disciplineRepository.deleteByUuid(uuid);
     }
