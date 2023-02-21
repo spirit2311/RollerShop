@@ -1,13 +1,18 @@
 package com.example.rollerShop.db.controller;
 
 import com.example.rollerShop.db.dtoEnity.SkateDto;
+import com.example.rollerShop.db.entity.Brand;
+import com.example.rollerShop.db.entity.Skate;
 import com.example.rollerShop.db.service.SkateService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -16,6 +21,7 @@ import java.util.UUID;
 public class SkateController {
 
     //    private final SkateRepository skateRepository;
+
     public final SkateService skateService;
 //    private final SkateMapper skateMapper;
 
@@ -35,6 +41,13 @@ public class SkateController {
             @RequestParam(value = "priceTo", defaultValue = "10000") Integer finishPrice) {
         return ResponseEntity.ok(skateService.getAllSkates(brand, discipline, year, sortYear, sortDirection, startPrice, finishPrice));
     }
+
+//    @GetMapping(path = "/search")
+//    public ResponseEntity<?> getSearchBrandAndModel(
+//            @RequestParam String brand,
+//            @RequestParam String model){
+//        return ResponseEntity.ok(skateService.searchByBrandAndModel(brand,model));
+//    }
 
 
     //POST

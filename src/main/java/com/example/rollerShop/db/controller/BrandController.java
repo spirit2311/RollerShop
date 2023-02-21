@@ -24,7 +24,7 @@ public class BrandController {
         return brandService.getBrandByUuid(uuid);
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping
     public List<Brand> getAllBrands(){
         return brandService.getAllBrands();
     }

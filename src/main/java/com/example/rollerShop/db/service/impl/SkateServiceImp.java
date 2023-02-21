@@ -10,15 +10,16 @@ import com.example.rollerShop.db.repository.DisciplineRepository;
 import com.example.rollerShop.db.repository.SkateRepository;
 import com.example.rollerShop.db.service.SkateService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.criteria.Order;
-import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -61,11 +62,11 @@ public class SkateServiceImp implements SkateService {
 //            }
 //
 
-            if (sortYear.equals("desc")){
+            if (sortYear.equals("desc")) {
                 query.orderBy(criteriaBuilder.desc(skateRoot.get("year")));
             }
 
-            if(sortYear.equals("asc")){
+            if (sortYear.equals("asc")) {
                 query.orderBy(criteriaBuilder.asc(skateRoot.get("year")));
             }
 
@@ -95,6 +96,31 @@ public class SkateServiceImp implements SkateService {
                 .collect(Collectors.toList());
     }
 
+//    @Override
+//    public List<SkateDto> searchByBrandAndModel(String brand, String model) {
+//
+//        Specification<Skate> specification = (root, query, criteriaBuilder) -> {
+//            List<Predicate> predicates = new ArrayList<>();
+//
+//            if (StringUtils.hasText(brand)){
+//                predicates.add(criteriaBuilder.like(
+//                        root.join("brand", JoinType.INNER)
+//                                .get("brand").as(String.class), "%" + brand + "%"));
+//            }
+//            if (StringUtils.hasText(model)) {
+//                predicates.add(criteriaBuilder.like(root.get("model"), "%" + model + "%"));
+//            }
+//            return criteriaBuilder.and(
+//                    predicates.toArray(new Predicate[0])
+//            );
+//
+//        };
+//        return skateRepository.findAll(specification)
+//                .stream()
+//                .map(skateMapper::toSkateDto)
+//                .collect(Collectors.toList());
+//    }
+
     @Override
     public SkateDto saveSkate(SkateDto skateData) {
         Discipline discipline = disciplineRepository.findById(skateData.getDisciplineId())
@@ -111,17 +137,22 @@ public class SkateServiceImp implements SkateService {
     @Transactional
     @Override
     public void updateSkate(UUID uuid, SkateDto updateSkateData) {
+        Discipline discipline = disciplineRepository.findById(updateSkateData.getDisciplineId())
+                .orElseThrow(() -> new RuntimeException("discipline not found"));
+        Brand brand = brandRepository.findById(updateSkateData.getBrandId())
+                .orElseThrow(() -> new RuntimeException("brand not found"));
         Skate skate = skateRepository.findByUuid(uuid)
                 .orElseThrow(() -> new RuntimeException(
                         String.format("Skate with UUID %s no found", uuid)
                 ));
         Skate newSkateData = skateMapper.toSkate(updateSkateData);
-        skate.setBrand(newSkateData.getBrand());
-        skate.setDiscipline(newSkateData.getDiscipline());
+        skate.setBrand(brand);
+        skate.setDiscipline(discipline);
         skate.setModel(newSkateData.getModel());
         skate.setYear(newSkateData.getYear());
         skate.setPrice(newSkateData.getPrice());
         skate.setDescription(newSkateData.getDescription());
+//        skateRepository.save(newSkateData);
     }
 
     @Override

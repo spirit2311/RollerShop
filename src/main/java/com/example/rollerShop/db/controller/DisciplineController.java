@@ -25,7 +25,7 @@ public class DisciplineController {
         return disciplineService.getDisciplineByUuid(uuid);
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping
     public List<Discipline> getAllDisciplines(){
         return disciplineService.getAllDisciplines();
     }
