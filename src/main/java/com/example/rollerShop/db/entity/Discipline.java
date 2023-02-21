@@ -18,6 +18,7 @@ public class Discipline {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NonNull
     @Column(name = "id")
     private Integer id;
 

@@ -18,6 +18,8 @@ public interface SkateRepository extends JpaRepository<Skate, Integer>, JpaSpeci
 
     Optional<Skate> findByUuid(UUID uuid);
 
+//    Optional<Skate> findByModelAndBrand_IdIgnoreCase(String model, Integer brand_id);
+
     @Modifying
     void deleteByUuid(UUID uuid);
 }

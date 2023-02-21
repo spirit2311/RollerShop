@@ -27,11 +27,11 @@ public class Skate {
     private UUID uuid = UUID.randomUUID();
 
     //TODO List<Disciplines>
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "discipline_id")
     private Discipline discipline;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
@@ -46,5 +46,6 @@ public class Skate {
 
     @Column(name = "description")
     private String description;
+
 
 }

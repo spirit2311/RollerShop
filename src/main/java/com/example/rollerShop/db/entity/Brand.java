@@ -18,6 +18,7 @@ public class Brand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NonNull
     @Column(name = "id")
     private Integer id;
 
