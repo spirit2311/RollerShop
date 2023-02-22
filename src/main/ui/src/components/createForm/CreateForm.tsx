@@ -14,26 +14,11 @@ import {useDispatch} from "react-redux";
 import LoadingContext from "../common/LoadingContext";
 
 const CreateForm = () => {
-    const dispatch: ThunkDispatch<{}, {}, SkatesActions> = useDispatch();
-    const {showLoading, hideLoading} = useContext(LoadingContext);
     const [value, setValue] = React.useState('skate');
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
-
-    useEffect(() => {
-        const onDisciplinesFetch = async () => {
-            await dispatch(fetchDisciplines());
-        };
-
-        const onBrandsFetch = async () => {
-            await dispatch(fetchBrands());
-        };
-
-        showLoading();
-        onDisciplinesFetch().then(onBrandsFetch).then(hideLoading);
-    }, [dispatch, hideLoading, showLoading]);
 
     return (
         <CreateFormWrapper>

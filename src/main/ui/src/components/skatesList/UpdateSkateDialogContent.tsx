@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from "react";
 import {RawBrand, RawDiscipline, Skate, SkateJsonModel} from "../../types";
 import {ThunkDispatch} from "@reduxjs/toolkit";
-import {fetchBrands, fetchDisciplines, fetchSkates, updateSkate} from "../../actions/skates";
+import {fetchBrands, fetchDisciplines, fetchSkates, setSkateUpdatedStatus, updateSkate} from "../../actions/skates";
 import {useDispatch, useSelector} from "react-redux";
 import {Alert, Box, Button, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import UpdateSkateDialogWrapper from "./UpdateSkateDialogWrapper";
@@ -21,9 +21,9 @@ const UpdateSkateDialogContent = ({skate, onClose}: { skate: Skate, onClose: () 
     const [brandId, setBrandId] = React.useState('');
     const [disciplineId, setDisciplineId] = React.useState('');
     const [model, setModel] = React.useState(defaultModelValue);
-    const [price, setPrice] = React.useState(defaultPriceValue);
+    const [price, setPrice] = React.useState<string | number>(defaultPriceValue);
     const [description, setDescription] = React.useState(defaultDescrValue);
-    const [year, setYear] = React.useState(defaultYearValue);
+    const [year, setYear] = React.useState<string | number>(defaultYearValue);
     const {showLoading, hideLoading} = useContext(LoadingContext);
     const {error, skateUpdatedStatus, disciplines, brands} = useSelector(({skates}) => {
         return {
@@ -69,7 +69,9 @@ const UpdateSkateDialogContent = ({skate, onClose}: { skate: Skate, onClose: () 
             model
         };
 
-        await dispatch(updateSkate(uuid, skateJsonModel));
+        await dispatch(updateSkate(uuid, skateJsonModel)).then(() => {
+            dispatch(setSkateUpdatedStatus(null));
+        });
     };
 
     return (
@@ -124,7 +126,7 @@ const UpdateSkateDialogContent = ({skate, onClose}: { skate: Skate, onClose: () 
                         pattern="[0-9]*"
                         value={price}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            setPrice(Number(event.target.value));
+                            setPrice(event.target.value);
                         }}
                         required
                     />
@@ -144,7 +146,7 @@ const UpdateSkateDialogContent = ({skate, onClose}: { skate: Skate, onClose: () 
                         pattern="[0-9]*"
                         value={year}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            setYear(Number(event.target.value));
+                            setYear(event.target.value);
                         }}
                         required
                     />

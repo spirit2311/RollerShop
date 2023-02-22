@@ -1,14 +1,22 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {Alert, Box, Button} from "@mui/material";
 import {SkateJsonModel} from "../../../types";
 import {ThunkDispatch} from "@reduxjs/toolkit";
-import {createSkate, setCreateSkateError, setSkateCreatedStatus} from "../../../actions/skates";
+import {
+    createSkate,
+    fetchBrands,
+    fetchDisciplines,
+    setCreateSkateError,
+    setSkateCreatedStatus
+} from "../../../actions/skates";
 import {useDispatch, useSelector} from "react-redux";
 import {SkatesActions} from "../../../actions/types";
 import Dropdown from "../../common/Dropdown";
+import LoadingContext from "../../common/LoadingContext";
 
 const CreateSkateForm = () => {
     const dispatch: ThunkDispatch<{}, {}, SkatesActions> = useDispatch();
+    const {showLoading, hideLoading} = useContext(LoadingContext);
     const [brandId, setBrandId] = React.useState('');
     const [disciplineId, setDisciplineId] = React.useState('');
     const [model, setModel] = React.useState('');
@@ -24,6 +32,19 @@ const CreateSkateForm = () => {
             skateCreatedStatus: skates.skates.skateCreatedStatus
         };
     });
+
+    useEffect(() => {
+        const onDisciplinesFetch = async () => {
+            await dispatch(fetchDisciplines());
+        };
+
+        const onBrandsFetch = async () => {
+            await dispatch(fetchBrands());
+        };
+
+        showLoading();
+        onDisciplinesFetch().then(onBrandsFetch).then(hideLoading);
+    }, [dispatch, hideLoading, showLoading]);
 
     useEffect(() => {
         return () => {
@@ -111,7 +132,7 @@ const CreateSkateForm = () => {
                 </span>
                 <span className="formGroup">
                     <input
-                        type="number"
+                        type="text"
                         placeholder="Price"
                         pattern="[0-9]*"
                         value={price}
@@ -131,7 +152,7 @@ const CreateSkateForm = () => {
                     required
                 />
                 <input
-                    type="number"
+                    type="text"
                     placeholder="Year"
                     pattern="[0-9]*"
                     value={year}

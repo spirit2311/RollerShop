@@ -135,11 +135,9 @@ export function deleteDiscipline(id: string): ThunkAction<Promise<void>, {}, {},
     return async (dispatch: ThunkDispatch<{}, {}, SkatesActions>): Promise<void> => {
         try {
             const res = await apis.delete(`/disciplines/${id}`).catch(e => {
-                debugger;
                 dispatch(setCreateDisciplineError(e.message));
             });
             if (res) {
-                debugger;
                 dispatch(setCreateDisciplineError(''));
             }
         } catch (e) {
