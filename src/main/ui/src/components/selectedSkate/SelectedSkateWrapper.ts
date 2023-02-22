@@ -23,9 +23,8 @@ const SelectedSkateWrapper = styled.div`
     
       .mainInfo {
         position: absolute;
-        padding-left: 25px;
+        padding-right: 25%;
         margin-top: 50px;
-        width: 1500px;
         display: flex;
     
         img {
