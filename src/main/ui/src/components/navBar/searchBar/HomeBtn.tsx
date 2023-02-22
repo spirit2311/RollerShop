@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 const HomeBtn = () => ((
     <Link to='/'>
         <IconButton aria-label="delete" size="large">
-            <HomeIcon fontSize="inherit" />
+            <HomeIcon className="HomeBtn" fontSize="inherit" />
         </IconButton>
     </Link>
 ));

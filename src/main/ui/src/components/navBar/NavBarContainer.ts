@@ -11,12 +11,20 @@ const NavBarContainer = styled.div`
     width: 59%;
     
     button, .MuiSvgIcon-root {
-        color: white;
+        color: #5A0289;
         font-size: 50px;
     }
   
+    .HomeBtn {
+      color: white;
+    }
+  
     .iconContainer {
+      padding-left: 8%;
+      
       .MuiSvgIcon-root {
+        color: white;
+        
         &:hover {
           cursor: pointer;
           background-color: rgba(0, 0, 0, 0.04);

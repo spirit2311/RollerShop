@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const SearchWrapper = styled.div`
+    width: 100%;
+  
     input {
         background-color: white;
         border: 2px solid #5a0289;
@@ -8,9 +10,9 @@ const SearchWrapper = styled.div`
         font-size: 18px;
         padding: 15px;
         height: 30px;
-        width: 900px;
         border-top-left-radius: 30px;
         border-bottom-left-radius: 30px;
+        min-width: 100%;
         
         &.hasResults {
             border-bottom-left-radius: 0;
