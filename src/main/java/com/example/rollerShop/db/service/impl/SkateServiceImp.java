@@ -49,8 +49,10 @@ public class SkateServiceImp implements SkateService {
         Specification<Skate> specification = (skateRoot, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            if (StringUtils.hasText(brand)) {
-                predicates.add(criteriaBuilder.like(skateRoot.get("brand"), "%" + brand + "%"));
+            if (StringUtils.hasText(brand)){
+                predicates.add(criteriaBuilder.like(
+                        skateRoot.join("brand", JoinType.INNER)
+                                .get("brand").as(String.class), "%" + brand + "%"));
             }
 
             if (StringUtils.hasText(discipline)) {
