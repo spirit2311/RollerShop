@@ -1,6 +1,6 @@
 package com.example.rollerShop.db.service.impl;
 
-import com.example.rollerShop.db.dtoEnity.BrandDto;
+import com.example.rollerShop.db.dto.BrandDto;
 import com.example.rollerShop.db.entity.Brand;
 import com.example.rollerShop.db.repository.BrandRepository;
 import com.example.rollerShop.db.service.BrandService;

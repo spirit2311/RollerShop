@@ -1,4 +1,4 @@
-package com.example.rollerShop.db.dtoEnity;
+package com.example.rollerShop.db.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

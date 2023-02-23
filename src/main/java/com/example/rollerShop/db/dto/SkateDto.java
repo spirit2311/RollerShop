@@ -1,18 +1,18 @@
-package com.example.rollerShop.db.dtoEnity;
+package com.example.rollerShop.db.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 import java.util.UUID;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class SkateDto {
 
 //    @Positive
@@ -21,11 +21,13 @@ public class SkateDto {
     private UUID uuid = UUID.randomUUID();
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @NotNull(message = "TEST")
     private Integer disciplineId;
 
     private DisciplineDto discipline;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @NotNull(message = "TEST")
     private Integer brandId;
 
     private BrandDto brand;
@@ -45,7 +47,6 @@ public class SkateDto {
     private Integer price;
 
     @NonNull
-    @Size(min = 15, max = 500, message
-            = "About Me must be between 15 and 500 characters")
+    @Size(min = 15, max = 500, message = "About Me must be between 15 and 500 characters")
     private String description;
 }

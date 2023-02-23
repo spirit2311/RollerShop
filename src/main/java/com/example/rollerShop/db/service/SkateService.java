@@ -1,11 +1,8 @@
 package com.example.rollerShop.db.service;
 
-import com.example.rollerShop.db.dtoEnity.SkateDto;
-import com.example.rollerShop.db.entity.Brand;
-import com.example.rollerShop.db.entity.Skate;
+import com.example.rollerShop.db.dto.SkateDto;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public interface SkateService {

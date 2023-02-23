@@ -1,7 +1,7 @@
 package com.example.rollerShop.db.service.impl;
 
-import com.example.rollerShop.db.dtoEnity.SkateDto;
-import com.example.rollerShop.db.dtoEnity.SkateMapper;
+import com.example.rollerShop.db.dto.SkateDto;
+import com.example.rollerShop.db.mappers.SkateMapper;
 import com.example.rollerShop.db.entity.Brand;
 import com.example.rollerShop.db.entity.Discipline;
 import com.example.rollerShop.db.entity.Skate;
@@ -9,17 +9,16 @@ import com.example.rollerShop.db.repository.BrandRepository;
 import com.example.rollerShop.db.repository.DisciplineRepository;
 import com.example.rollerShop.db.repository.SkateRepository;
 import com.example.rollerShop.db.service.SkateService;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 

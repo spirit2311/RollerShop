@@ -1,7 +1,6 @@
 package com.example.rollerShop.db.service;
 
-import com.example.rollerShop.db.dtoEnity.DisciplineDto;
-import com.example.rollerShop.db.dtoEnity.SkateDto;
+import com.example.rollerShop.db.dto.DisciplineDto;
 import com.example.rollerShop.db.entity.Discipline;
 
 import java.util.List;

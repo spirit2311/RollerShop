@@ -1,5 +1,6 @@
-package com.example.rollerShop.db.dtoEnity;
+package com.example.rollerShop.db.mappers;
 
+import com.example.rollerShop.db.dto.SkateDto;
 import com.example.rollerShop.db.entity.Skate;
 import org.mapstruct.Mapper;
 

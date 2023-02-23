@@ -1,6 +1,6 @@
 //package com.example.rollerShop.service;
 //
-//import com.example.rollerShop.db.dtoEnity.SkateMapper;
+//import com.example.rollerShop.db.mappers.SkateMapper;
 //import com.example.rollerShop.db.entity.Skate;
 //import com.example.rollerShop.db.repository.SkateRepository;
 //import com.example.rollerShop.db.service.SkateServiceImp;

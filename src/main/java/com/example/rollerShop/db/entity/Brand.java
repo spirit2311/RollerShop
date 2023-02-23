@@ -1,9 +1,9 @@
 package com.example.rollerShop.db.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
 import java.util.UUID;
 
 @Setter
@@ -22,7 +22,7 @@ public class Brand {
     @Column(name = "id")
     private Integer id;
 
-    @Type(type = "uuid-char")
+//    @Type(type = "uuid-char")
     @Column(name = "UUID")
     private UUID uuid = UUID.randomUUID();
 

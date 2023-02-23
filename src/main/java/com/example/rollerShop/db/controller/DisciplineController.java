@@ -1,8 +1,7 @@
 package com.example.rollerShop.db.controller;
 
 
-import com.example.rollerShop.db.dtoEnity.DisciplineDto;
-import com.example.rollerShop.db.entity.Brand;
+import com.example.rollerShop.db.dto.DisciplineDto;
 import com.example.rollerShop.db.entity.Discipline;
 import com.example.rollerShop.db.service.DisciplineService;
 import lombok.RequiredArgsConstructor;

@@ -1,29 +1,32 @@
 package com.example.rollerShop.db.controller;
 
-import com.example.rollerShop.db.dtoEnity.SkateDto;
-import com.example.rollerShop.db.entity.Brand;
-import com.example.rollerShop.db.entity.Skate;
+import com.example.rollerShop.db.dto.SkateDto;
 import com.example.rollerShop.db.service.SkateService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
+@Validated
 @RestController
 @RequestMapping(path = "/skates")
 @RequiredArgsConstructor
 public class SkateController {
 
-    //    private final SkateRepository skateRepository;
-
     public final SkateService skateService;
-//    private final SkateMapper skateMapper;
 
     @GetMapping(value = "/{id}")
     public List<SkateDto> getSkateById(@PathVariable("id") UUID uuid) {
@@ -52,7 +55,7 @@ public class SkateController {
 
     //POST
     @PostMapping()
-    public ResponseEntity<?> addSkate(@RequestBody SkateDto skateDto) {
+    public ResponseEntity<?> addSkate(@RequestBody @Valid SkateDto skateDto) {
         skateService.saveSkate(skateDto);
         return ResponseEntity.accepted().build();
     }

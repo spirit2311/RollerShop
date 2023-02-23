@@ -2,7 +2,7 @@ package com.example.rollerShop.db.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.UUID;
 
 @Setter
@@ -20,7 +20,7 @@ public class Order extends BaseEntity {
     @Column(name = "id")
     private Integer id;
 
-    @org.hibernate.annotations.Type(type = "uuid-char")
+//    @org.hibernate.annotations.Type(type = "uuid-char")
     @Column(name = "UUID")
     private UUID uuid = UUID.randomUUID();
 

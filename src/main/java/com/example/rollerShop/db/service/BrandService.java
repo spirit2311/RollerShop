@@ -1,7 +1,6 @@
 package com.example.rollerShop.db.service;
 
-import com.example.rollerShop.db.dtoEnity.BrandDto;
-import com.example.rollerShop.db.dtoEnity.DisciplineDto;
+import com.example.rollerShop.db.dto.BrandDto;
 import com.example.rollerShop.db.entity.Brand;
 
 import java.util.List;

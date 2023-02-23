@@ -1,8 +1,8 @@
 package com.example.rollerShop.db.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.util.UUID;
 
 @Setter
@@ -20,7 +20,7 @@ public class Basket {
     @Column(name = "id")
     private Integer id;
 
-    @org.hibernate.annotations.Type(type = "uuid-char")
+//    @org.hibernate.annotations.Type(type = "uuid-char")
     @Column(name = "UUID")
     private UUID uuid = UUID.randomUUID();
 

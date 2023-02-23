@@ -4,6 +4,7 @@ import com.example.rollerShop.db.controller.SkateController;
 import com.example.rollerShop.db.repository.SkateRepository;
 import com.example.rollerShop.db.service.SkateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -17,8 +18,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
-
-import javax.validation.constraints.NotNull;
 
 
 @RunWith(SpringRunner.class)

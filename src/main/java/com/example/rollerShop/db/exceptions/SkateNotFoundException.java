@@ -1,4 +1,4 @@
-package com.example.rollerShop.db.exception;
+package com.example.rollerShop.db.exceptions;
 
 public class SkateNotFoundException extends RuntimeException {
 
