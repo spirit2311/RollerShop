@@ -19,7 +19,7 @@ public abstract class BaseEntity {
 
     @Column(name = "UUID", nullable = false, length = 36, unique = true)
     @Convert(converter = UUIDConverter.class)
-    private UUID uuid = UUID.randomUUID();
+    private final UUID uuid = UUID.randomUUID();
 
 
     private static class UUIDConverter implements AttributeConverter<UUID, String> {
