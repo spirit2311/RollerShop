@@ -15,7 +15,7 @@ public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "UUID", nullable = false, length = 36, unique = true)
     @Convert(converter = UUIDConverter.class)

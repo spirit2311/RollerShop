@@ -47,6 +47,6 @@ public class SkateDto {
     private Integer price;
 
     @NonNull
-    @Size(min = 15, max = 500, message = "About Me must be between 15 and 500 characters")
+    @Size(min = 1, max = 500, message = "About Me must be between 15 and 500 characters")
     private String description;
 }

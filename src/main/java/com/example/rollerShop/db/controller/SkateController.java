@@ -26,7 +26,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class SkateController {
 
+    //    private final SkateRepository skateRepository;
+
     public final SkateService skateService;
+//    private final SkateMapper skateMapper;
 
     @GetMapping(value = "/{id}")
     public List<SkateDto> getSkateById(@PathVariable("id") UUID uuid) {
@@ -45,12 +48,11 @@ public class SkateController {
         return ResponseEntity.ok(skateService.getAllSkates(brand, discipline, year, sortYear, sortDirection, startPrice, finishPrice));
     }
 
-//    @GetMapping(path = "/search")
-//    public ResponseEntity<?> getSearchBrandAndModel(
-//            @RequestParam String brand,
-//            @RequestParam String model){
-//        return ResponseEntity.ok(skateService.searchByBrandAndModel(brand,model));
-//    }
+    @GetMapping(path = "/search")
+    public ResponseEntity<?> getSearchBrandAndModel(
+            @RequestParam("value") String search) {
+        return ResponseEntity.ok(skateService.getRollerSkateModelAndBrand(search));
+    }
 
 
     //POST

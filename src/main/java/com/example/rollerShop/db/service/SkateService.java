@@ -10,7 +10,7 @@ public interface SkateService {
 
     List<SkateDto> getAllSkates(String brand, String discipline, Integer year, String sortYear, String sortDirection, Integer priceFrom, Integer priceTo);
 
-//    List<SkateDto> searchByBrandAndModel(String brand, String model);
+    List<SkateDto> getRollerSkateModelAndBrand(String search);
 
     SkateDto saveSkate(SkateDto skateData);
 

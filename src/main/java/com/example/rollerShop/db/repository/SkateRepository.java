@@ -2,12 +2,10 @@ package com.example.rollerShop.db.repository;
 
 import com.example.rollerShop.db.entity.Skate;
 import lombok.NonNull;
-import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,8 +17,8 @@ public interface SkateRepository extends JpaRepository<Skate, Integer>, JpaSpeci
 
     Optional<Skate> findByUuid(UUID uuid);
 
-//    Optional<Skate> findByModelAndBrand_IdIgnoreCase(String model, Integer brand_id);
 
     @Modifying
     void deleteByUuid(UUID uuid);
+
 }

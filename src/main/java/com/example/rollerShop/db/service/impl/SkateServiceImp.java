@@ -9,6 +9,7 @@ import com.example.rollerShop.db.repository.BrandRepository;
 import com.example.rollerShop.db.repository.DisciplineRepository;
 import com.example.rollerShop.db.repository.SkateRepository;
 import com.example.rollerShop.db.service.SkateService;
+import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
@@ -97,30 +98,27 @@ public class SkateServiceImp implements SkateService {
                 .collect(Collectors.toList());
     }
 
-//    @Override
-//    public List<SkateDto> searchByBrandAndModel(String brand, String model) {
-//
-//        Specification<Skate> specification = (root, query, criteriaBuilder) -> {
-//            List<Predicate> predicates = new ArrayList<>();
-//
-//            if (StringUtils.hasText(brand)){
-//                predicates.add(criteriaBuilder.like(
-//                        root.join("brand", JoinType.INNER)
-//                                .get("brand").as(String.class), "%" + brand + "%"));
-//            }
-//            if (StringUtils.hasText(model)) {
-//                predicates.add(criteriaBuilder.like(root.get("model"), "%" + model + "%"));
-//            }
-//            return criteriaBuilder.and(
-//                    predicates.toArray(new Predicate[0])
-//            );
-//
-//        };
-//        return skateRepository.findAll(specification)
-//                .stream()
-//                .map(skateMapper::toSkateDto)
-//                .collect(Collectors.toList());
-//    }
+    @Override
+    public List<SkateDto> getRollerSkateModelAndBrand(String search) {
+        Specification<Skate> spec = (root, query, builder) -> {
+            String searchLower = search.toLowerCase();
+            String pattern = "%" + searchLower + "%";
+
+            Expression<String> brandModel = builder.concat(
+                    builder.lower(root.join("brand", JoinType.INNER).get("brand").as(String.class)),
+                    builder.concat(" ", builder.lower(root.get("model")))
+            );
+
+            return builder.like(builder.lower(brandModel), pattern);
+        };
+
+        List<Skate> all = skateRepository.findAll(spec);
+        return all
+                .stream()
+                .map(skateMapper::toSkateDto)
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public SkateDto saveSkate(SkateDto skateData) {

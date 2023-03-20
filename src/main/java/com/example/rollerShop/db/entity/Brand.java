@@ -14,17 +14,7 @@ import java.util.UUID;
 @ToString
 @Builder
 @Table(name = "brand")
-public class Brand {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
-    @Column(name = "id")
-    private Integer id;
-
-//    @Type(type = "uuid-char")
-    @Column(name = "UUID")
-    private UUID uuid = UUID.randomUUID();
+public class Brand extends BaseEntity{
 
     @Column(name = "brand")
     private String brand;

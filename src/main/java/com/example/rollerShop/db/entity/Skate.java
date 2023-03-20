@@ -29,7 +29,7 @@ public class Skate extends BaseEntity {
     private Discipline discipline;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "brand_id")
+    @JoinColumn(name = "brand_id", referencedColumnName = "id")
     private Brand brand;
 
     @Column(name = "model")
